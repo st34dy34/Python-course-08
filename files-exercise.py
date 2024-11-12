@@ -21,36 +21,36 @@ def Write_seven_long(text,path):
                 f.write(word)
 
 def Repost(source_path,output_path):
-    with open(source_path, "r") as x:
-         with open(output_path, "w") as y:
+    with open(source_path, "r") as x, open(output_path, "w") as y:
             y.writelines(x)
-   
-def Add_asteriks(path):
-    asteriks = "\n************"
-    text = Read_file(path)
-    happened = False
-    index = 1
-    for line in text:
-        if "," in line:
-            happened = True
-            happend_i = index
-        index += 1
-    if happened == False:
-        Append_file(path, asteriks)
 
+def Write_elements(path,text_array):
+    for item in text_array:
+        with open(path,"a") as f:
+            f.write(item + "\n")
 
+def Calculate_characters_in_file(path):
+    with open(path, "r") as f:
+        count = len(f.read())
+        return count
 
-        
-                
-
+def Calculate_lines_in_file(path):
+    with open(path, "r") as f:
+        text = f.readlines()
+        count = len(text)
+        return count
 
 
 FILE_PATH = "files/source.txt"
+names = ["Pepa", "Karel", "Honza"]
 
 text = Read_file(FILE_PATH)
 Write_seven_long(text,"files/sevenplus.txt")
 Repost(FILE_PATH, "files/rewrite.txt")
-Add_asteriks("files/asteriks.txt")
-print(text)
+Write_elements("files/names.txt",names)
+number_of_chars = Calculate_characters_in_file("files/names.txt")
+print(f"There is {number_of_chars} characters in file")
+number_of_lines = Calculate_lines_in_file("files/names.txt")
+print(f"There is {number_of_lines} lines in file")
 
 
